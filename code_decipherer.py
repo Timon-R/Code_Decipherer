@@ -20,7 +20,6 @@ Author: Timon Renzelmann
 
 import sys
 import pandas as pd
-import os
 
 # Define code mappings
 country_codes = {
@@ -242,14 +241,9 @@ def decode_tech_from_cli():
         print(result)       
 
 if __name__ == '__main__':
-    # input_file = 'input_data\WP1_NetZero\data\TECHNOLOGY.csv'
-    # output_file = 'tech_codes.csv'
-    input_file = 'input_data\WP1_NetZero\data\FUEL.csv'
-    output_file = 'fuel_codes.csv'
-    add_code_descriptions_to_csv(input_file, output_file)
-    # if len(sys.argv) < 2 or len(sys.argv) > 3:
-    #     print("Usage: python script.py input_file [output_file]")
-    # else:
-    #     input_file = sys.argv[1]
-    #     output_file = sys.argv[2] if len(sys.argv) > 2 else None
-    #     add_code_descriptions_to_csv(input_file, output_file)
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+        print("Usage: python script.py input_file [output_file]")
+    else:
+        input_file = sys.argv[1]
+        output_file = sys.argv[2] if len(sys.argv) > 2 else None
+        add_code_descriptions_to_csv(input_file, output_file)
