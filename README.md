@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # OSEMBE Code Decoder and CSV Modifier
 
 ## Overview
