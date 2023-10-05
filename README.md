@@ -15,16 +15,17 @@ The script includes the following functions:
 
 1. `decode_tech(tech_code)`: Decodes a single 9-digit technology code.
 2. `decode_fuel(fuel_code)`: Decodes a single 4-digit fuel code.
-3. `add_code_descriptions_to_csv(input_csv_filename, output_csv_filename=None)`: Creates a new CSV file with a new column containing code descriptions. when the output file is none or equals the input file, it will replace it.
+3. `add_code_descriptions_to_csv(input_csv_filename, output_csv_filename=None)`: Creates a new CSV file with a new column containing code descriptions. when the output file is none or equals the input file, it will replace the input file.
 
 ## Example Usages
 
 Here's an example of how to use the script:
 
+```python 
 input_csv_filename = 'TECHNOLOGY.csv'
 output_csv_filename = 'TECHNOLOGY_explained.csv'
 add_code_descriptions_to_csv(input_csv_filename, output_csv_filename)
-
+```
 ## Command Line Usage
 
 You can use the script from the command line with the following usages:
