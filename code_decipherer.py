@@ -20,6 +20,7 @@ Author: Timon Renzelmann
 
 import sys
 import pandas as pd
+import os
 
 # Define code mappings
 country_codes = {
@@ -44,7 +45,7 @@ country_codes = {
     'LU': 'Luxembourg',
     'LV': 'Latvia',
     'MT': 'Malta',
-    'NL': 'Netherlands',
+    'NL': 'the Netherlands',
     'NO': 'Norway',
     'PL': 'Poland',
     'PT': 'Portugal',
@@ -125,17 +126,22 @@ def decode_tech(tech_code):
 
     country_description = country_codes.get(country, f'Unknown country')
     commodity_description = commodity_codes.get(commodity, f'Unknown commodity')
-    technology_description = technology_codes.get(technology, f'Unknown technology')
+    if technology in technology_codes:
+        technology_description = technology_codes[technology]
+    elif technology in country_codes:
+            technology_description = f'connected to {country_codes[technology]}'
+    else:
+        technology_description = 'Unknown technology'
     energy_level_description = energy_level_codes.get(energy_level, f'Unknown energy level')
     age_description = f'age {age}'
     size_description = f'size {size}'
 
     full_description = (
-        f"{country_description} ({country}), "
-        f"{commodity_description} ({commodity}), "
-        f"{technology_description} ({technology}), "
-        f"{energy_level_description} ({energy_level}), "
-        f"{age_description}, "
+        f"{country_description} ({country})| "
+        f"{commodity_description} ({commodity})| "
+        f"{technology_description} ({technology})| "
+        f"{energy_level_description} ({energy_level})| "
+        f"{age_description}| "
         f"{size_description}"
     )
 
@@ -160,11 +166,27 @@ def decode_fuel(fuel_code):
     commodity_description = commodity_codes.get(commodity, f'Unknown commodity')
     
     full_description = (
-        f"{country_description} ({country}), "
+        f"{country_description} ({country})| "
         f"{commodity_description} ({commodity})"
     )
 
     return full_description
+
+def decode_code(code):
+    """Decodes a single code of 4 or 9 digits.
+    
+    Args:
+        code (str): The code to decode.
+        
+    Returns:
+        str: The decoded description of the code.
+    """
+    if len(code) == 9:
+        return decode_tech(code)
+    elif len(code) == 4:
+        return decode_fuel(code)
+    else:
+        return "Error: Code length must be 4 or 9"
     
 def add_code_descriptions_to_csv(input_csv_filename, output_csv_filename=None):
     """Modifies a CSV file by adding a ' #codedescription' column.
@@ -241,6 +263,12 @@ def decode_tech_from_cli():
         print(result)       
 
 if __name__ == '__main__':
+    # input_file = 'input_data\\WP1_NetZero\\data\\TECHNOLOGY.csv'
+    # output_file = 'tech_codes.csv'
+    # input_file2 = 'input_data\WP1_NetZero\data\FUEL.csv'
+    # output_file2 = 'fuel_codes.csv'
+    # add_code_descriptions_to_csv(input_file, output_file)
+    # add_code_descriptions_to_csv(input_file2, output_file2)
     if len(sys.argv) < 2 or len(sys.argv) > 3:
         print("Usage: python script.py input_file [output_file]")
     else:
