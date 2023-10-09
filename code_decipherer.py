@@ -103,6 +103,7 @@ technology_codes = {
     'ST': 'Steam cycle',
     'UT': 'Utility PV',
     'WV': 'Wave power',
+    '00': 'unspecified',
 }
 
 energy_level_codes = {
